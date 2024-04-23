@@ -70,7 +70,7 @@ def compress(message,msg):
         os.remove(f'{message.id}downstatus.txt')
 
     name = vfile.split("/")[-1]
-    cmd = f'./ffmpeg/ffmpeg -i {vfile} -c:v libx265 -vtag hvc1 output-{message.id}.mp4'
+    cmd = f'./ffmpeg/ffmpeg -i {vfile} -vf scale="iw/5:ih/5" -c:v libx264 -crf 19 -preset ultrafast output-{message.id}.mp4'
     app.edit_message_text(message.chat.id, msg.id, "__Compressing__") 
     try:
         os.system(cmd)
@@ -78,7 +78,7 @@ def compress(message,msg):
         app.edit_message_text(message.chat.id, msg.id, "**Error**")
         return
 
-    file_exists = os.path.exists(f'output-{message.id}.mkv')
+    file_exists = os.path.exists(f'output-{message.id}.mp4')
     if file_exists:
         os.remove(vfile)
     else:
