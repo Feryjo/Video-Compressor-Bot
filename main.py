@@ -7,9 +7,9 @@ import pyrogram
 
 
 # setup
-bot_token = os.environ.get("TOKEN", "") 
-api_hash = os.environ.get("HASH", "") 
-api_id = os.environ.get("ID", "") 
+bot_token = os.environ.get("TOKEN", "7174105903:AAFBxzR-dP7SmB_3LeET6cfMbK1cQgFNhRk") 
+api_hash = os.environ.get("HASH", "6c344aadcd5bc0baf6b1a3ca64e3f840") 
+api_id = os.environ.get("ID", "12333261") 
 app = Client("my_bot",api_id=api_id, api_hash=api_hash,bot_token=bot_token)
 os.system("chmod 777 ./ffmpeg/ffmpeg")
 
@@ -70,7 +70,7 @@ def compress(message,msg):
         os.remove(f'{message.id}downstatus.txt')
 
     name = vfile.split("/")[-1]
-    cmd = f'./ffmpeg/ffmpeg -i {vfile} -c:v libx265 -vtag hvc1 output-{message.id}.mkv'
+    cmd = f'./ffmpeg/ffmpeg -i {vfile} -c:v libx265 -vtag hvc1 output-{message.id}.mp4'
     app.edit_message_text(message.chat.id, msg.id, "__Compressing__") 
     try:
         os.system(cmd)
